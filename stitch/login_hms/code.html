@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | The Clinical Atelier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-fixed": "#d8e2ff",
+                        "on-error": "#ffffff",
+                        "primary-container": "#0070ea",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary-container": "#c64f00",
+                        "secondary-fixed-dim": "#62d6ed",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-surface-variant": "#414754",
+                        "on-primary-fixed-variant": "#004493",
+                        "on-background": "#191c1d",
+                        "on-secondary-container": "#006776",
+                        "on-secondary-fixed": "#001f25",
+                        "inverse-primary": "#adc7ff",
+                        "on-primary-container": "#fefcff",
+                        "secondary": "#006877",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container": "#edeeef",
+                        "surface-dim": "#d9dadb",
+                        "surface-bright": "#f8f9fa",
+                        "surface": "#f8f9fa",
+                        "primary": "#0059bb",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-high": "#e7e8e9",
+                        "on-secondary-fixed-variant": "#004e5a",
+                        "surface-variant": "#e1e3e4",
+                        "surface-tint": "#005bc0",
+                        "on-tertiary-fixed-variant": "#7c2e00",
+                        "tertiary": "#9e3d00",
+                        "secondary-fixed": "#a4eeff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#717786",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#351000",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-surface": "#191c1d",
+                        "primary-fixed-dim": "#adc7ff",
+                        "secondary-container": "#75e7fe",
+                        "background": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "outline-variant": "#c1c6d7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-hidden">
+<main class="flex min-h-screen">
+<!-- Brand Visual Side (Left) -->
+<section class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-12 overflow-hidden bg-primary">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 mix-blend-overlay" data-alt="Interior of a modern high-end medical clinic with soft natural lighting, minimalist furniture, and large glass windows overlooking a garden." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEfiDQouZon4kYbqsWHXaycHF8M7FNCXaFa3gVHSEy7zjvEU7DJc1zRdSTmxywBPJniSDSQFMbi9-3pci5UDxElmAzkVl6gkQMNdYoGSXEe1Gyw7pGrUs7nZ_B4TL8b5r3X52DapJg39HtToBkNG6j1aUMj_auF3ZsrwCGZCsl2JG7GrHxCCCTUTfMTkPcPh40rlC_eDGys5kPW_0PS1fmup_DnXuHxbA5MhPVPrKD4mxDPstSVdFPwq7iU_iLexQpKtX4SqDtCII"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary via-primary/80 to-transparent"></div>
+</div>
+<!-- Branding -->
+<div class="relative z-10 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-primary shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+</div>
+<h1 class="font-headline font-bold text-2xl tracking-tighter text-white">The Clinical Atelier</h1>
+</div>
+<!-- Testimonial/Brand Content -->
+<div class="relative z-10 max-w-lg">
+<div class="mb-8">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-semibold uppercase tracking-widest mb-6">
+                        Medical Excellence
+                    </span>
+<h2 class="font-headline text-5xl font-extrabold text-white leading-[1.1] mb-6">
+                        The sanctuary for your <span class="text-secondary-fixed">clinical data.</span>
+</h2>
+<p class="text-primary-fixed text-lg leading-relaxed font-medium">
+                        Enter a space where healthcare meets high-end precision. Managing patient records has never felt so intuitive and secure.
+                    </p>
+</div>
+<div class="flex items-center gap-4 p-6 glass-panel rounded-xl shadow-xl">
+<div class="flex -space-x-3">
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="Portrait of a smiling professional female doctor in a white coat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2uqxAVGs4UmKnWaF7kjgpvjpqTWz6QQuwSJ9ZgauAPNvFysWrb-Fa5_YhIF1qrodsrk6moSnkZIjZXBUzuE6iAN4GNlPbV2IwW5LohJBOujXXRxCidB_Fss3RQ-FfIR2sPFLn9mwfCOi8RIphwLyRzp71KOG4_h3VGnoyg2gCcPIvRxl909VyE7opRe36d_OffSbBkoOzWav7FZvFCR9oXp_HSZN6-VWQKmnWM4plCHU5FLyxs-WUT8RqQDybunCbkJX9QGUB-Ys"/>
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="Portrait of a confident male surgeon in medical scrubs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAorGkD0x91QSBS3t1exA0yuc_iiTA1GwgHTRue3hbGBJIl91NJjwhDh-FTMm9d3cfhZk-9OKGuCwJYxKAdQ37nvCQonoNNCwDVYUn7PeSqd9lDziDugyvoYbRG9XW07WZGxdZfzM7poAYaOqnU5tR9F77u7u-NybzrbsvddwTU7w6iAhAjokrV8bxNxC2YoQe48U97lRL6hwmXuTbezZcfbVQpzP4Fte4TX4c-TaRdlg9YdkpNuSgsdaTv0zhhKneh5xLApSOO8IM"/>
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="Portrait of a friendly medical professional nurse" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRgCRGu842DRG7CQfpQb87FpMXq5dyIDay4c-uRYWiQlUumirgtc8ywwdKiKZCUaQOHabtlTzCf5vnwTuxId4KHwF0aWEWJG06wLf5iBkSUDAHRD9SB0WuZMa-zJgk9-VG55Cp_8L9DF_KmhL8m4D7lJkCK1NBJ1VQMYdAY0N-3dX1TU0877DIWYJCKbfz71EeovS5WPp1d_OTz8LJM1JMw9WJxR3TzRzeeziLyvsZ7-tncDaQ4wCBiTptrw9K6gIA5npLA7G1Tmw"/>
+</div>
+<div>
+<p class="text-sm font-bold text-primary">Join 500+ Medical Experts</p>
+<p class="text-xs text-on-surface-variant">Trusted by the city's leading surgeons</p>
+</div>
+</div>
+</div>
+<div class="relative z-10 text-primary-fixed/60 text-xs font-medium uppercase tracking-widest">
+                © 2024 THE CLINICAL ATELIER • PATIENT PRIVACY GUARANTEED
+            </div>
+</section>
+<!-- Login Form Side (Right) -->
+<section class="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 md:px-12 lg:px-24 bg-surface">
+<!-- Mobile Brand Logo (Visible only on small screens) -->
+<div class="lg:hidden absolute top-8 left-8 flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+</div>
+<span class="font-headline font-bold text-lg tracking-tighter text-on-surface">Clinical Atelier</span>
+</div>
+<div class="w-full max-w-md">
+<div class="mb-10">
+<h3 class="font-headline text-3xl font-bold text-on-surface mb-2">Welcome Back</h3>
+<p class="text-on-surface-variant font-medium">Please enter your credentials to access your portal.</p>
+</div>
+<form class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1" for="email">Email or Username</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-on-surface-variant group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<input class="w-full pl-11 pr-4 py-3.5 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl text-on-surface placeholder:text-outline-variant transition-all font-medium" id="email" name="email" placeholder="dr.smith@clinicalatelier.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="text-sm font-semibold text-on-surface-variant" for="password">Password</label>
+<a class="text-xs font-bold text-primary hover:text-primary-container transition-colors" href="#">Forgot password?</a>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-on-surface-variant group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</div>
+<input class="w-full pl-11 pr-12 py-3.5 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary rounded-xl text-on-surface placeholder:text-outline-variant transition-all font-medium" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-4 flex items-center text-on-surface-variant hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center px-1">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface bg-surface-container-low" id="remember" name="remember" type="checkbox"/>
+<label class="ml-3 text-sm font-medium text-on-surface-variant select-none" for="remember">Remember this device</label>
+</div>
+<!-- Login Button -->
+<button class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all flex items-center justify-center gap-2 group" type="submit">
+                        Sign In to Portal
+                        <span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="relative my-10">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-surface-container-highest"></div>
+</div>
+<div class="relative flex justify-center text-xs uppercase tracking-widest font-bold">
+<span class="bg-surface px-4 text-outline">New here?</span>
+</div>
+</div>
+<!-- Secondary Action -->
+<div class="flex flex-col gap-4">
+<button class="w-full py-4 bg-surface-container-high text-on-surface font-bold rounded-xl hover:bg-surface-variant transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+                        Register as Patient
+                    </button>
+<p class="text-center text-xs text-on-surface-variant mt-4 px-6 leading-relaxed">
+                        By logging in, you agree to our <a class="underline font-bold text-on-surface" href="#">Terms of Service</a> and <a class="underline font-bold text-on-surface" href="#">HIPAA Compliance Policy</a>.
+                    </p>
+</div>
+</div>
+<!-- Footer Small -->
+<footer class="absolute bottom-8 w-full max-w-md flex justify-between items-center px-4 md:px-0 text-[10px] text-outline font-bold uppercase tracking-[0.2em]">
+<div>v4.2.1-SECURE</div>
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">Help</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Security</a>
+</div>
+</footer>
+</section>
+</main>
+</body></html>

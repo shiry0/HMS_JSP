@@ -1,0 +1,54 @@
+.record-stack,
+.section-stack,
+.pill-row,
+.tag-list,
+.timeline {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.record-stack,
+.timeline {
+    flex-direction: column;
+}
+
+.dashboard-metrics {
+    margin-bottom: 3.5rem;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.78rem;
+    border-radius: 999px;
+    background: rgba(0, 89, 187, 0.08);
+    color: var(--primary);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    align-items: start;
+}
+
+.timeline-dot {
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-top: 0.45rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--teal), var(--primary));
+    box-shadow: 0 0 0 6px rgba(114, 230, 255, 0.18);
+}
+
+.timeline-item h3,
+.timeline-item h4,
+.record-card h3,
+.record-card h4 {
+    margin: 0 0 0.35rem;
+    font-family: "Manrope", "Inter", sans-serif;
+}
+

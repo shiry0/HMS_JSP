@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Clinical Atelier | Modern Hospital Management</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#e1e3e4",
+                      "primary-fixed": "#d8e2ff",
+                      "on-error": "#ffffff",
+                      "primary-container": "#0070ea",
+                      "on-tertiary-container": "#fffbff",
+                      "tertiary-container": "#c64f00",
+                      "secondary-fixed-dim": "#62d6ed",
+                      "tertiary-fixed-dim": "#ffb695",
+                      "on-surface-variant": "#414754",
+                      "on-primary-fixed-variant": "#004493",
+                      "on-background": "#191c1d",
+                      "on-secondary-container": "#006776",
+                      "on-secondary-fixed": "#001f25",
+                      "inverse-primary": "#adc7ff",
+                      "on-primary-container": "#fefcff",
+                      "secondary": "#006877",
+                      "surface-container-low": "#f3f4f5",
+                      "surface-container": "#edeeef",
+                      "surface-dim": "#d9dadb",
+                      "surface-bright": "#f8f9fa",
+                      "surface": "#f8f9fa",
+                      "primary": "#0059bb",
+                      "on-primary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#001a41",
+                      "surface-container-high": "#e7e8e9",
+                      "on-secondary-fixed-variant": "#004e5a",
+                      "surface-variant": "#e1e3e4",
+                      "surface-tint": "#005bc0",
+                      "on-tertiary-fixed-variant": "#7c2e00",
+                      "tertiary": "#9e3d00",
+                      "secondary-fixed": "#a4eeff",
+                      "inverse-on-surface": "#f0f1f2",
+                      "error": "#ba1a1a",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#717786",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#351000",
+                      "tertiary-fixed": "#ffdbcc",
+                      "on-surface": "#191c1d",
+                      "primary-fixed-dim": "#adc7ff",
+                      "secondary-container": "#75e7fe",
+                      "background": "#f8f9fa",
+                      "inverse-surface": "#2e3132",
+                      "outline-variant": "#c1c6d7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(24px);
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #0059bb 0%, #0070ea 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-sm dark:shadow-none flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-blue-800 dark:text-blue-300 font-headline">
+            The Clinical Atelier
+        </div>
+<div class="hidden md:flex items-center gap-8 font-headline font-semibold tracking-tight">
+<a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-600 transition-colors" href="#">Home</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="#">About</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="#">Services</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="#">Doctors</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-5 py-2 text-blue-600 font-semibold hover:bg-surface-container transition-all rounded-full">Login</button>
+<button class="px-6 py-2 brand-gradient text-white font-bold rounded-full shadow-sm hover:scale-95 transition-all duration-150">Register</button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[870px] flex items-center px-8 lg:px-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-15 grayscale" data-alt="Modern minimalist hospital lobby with floor-to-ceiling windows, natural wood accents, and soft warm afternoon sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYtoNQBkaoPM3TXzArmDhr2a2uda8mA3cW-NfhyRO33xvGXtx0RqC02ifXXPoJoYqm006BMNmtqU3QSrjsxYp5jGLFksR4rubBIx7P3-Pe_usWfAPGhHaSt3RSHdfNjnxgBN87PkyAMQN1J541QdN_ahkCcZIneK_LJpZftnX0ywOoj5Dx8cMTBDSOCBwe4RQos1Qv2ZBMk4DyfY4xJqS2xEGKoCs0d88nm-5p2OragzrT6WhwW-1TlnAM4UyiBBap4K43IwZv5SE"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/90 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-3xl">
+<span class="inline-block px-4 py-1.5 mb-6 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label text-sm font-semibold tracking-wide uppercase">
+                    Excellence in Healthcare
+                </span>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-background mb-6 leading-tight">
+                    Your Health, <br/><span class="text-primary italic">Our Priority</span>
+</h1>
+<p class="text-xl text-on-surface-variant mb-10 leading-relaxed max-w-xl">
+                    Experience a new standard of medical care where clinical precision meets human-centric design. At The Clinical Atelier, your recovery is treated as a masterpiece.
+                </p>
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-4 brand-gradient text-white rounded-xl font-headline font-bold text-lg shadow-lg hover:shadow-primary/20 transition-all">
+                        Book Appointment
+                    </button>
+<button class="px-8 py-4 bg-surface-container-high text-on-surface font-headline font-bold text-lg rounded-xl hover:bg-surface-container-highest transition-all">
+                        Learn More
+                    </button>
+</div>
+</div>
+</section>
+<!-- Emergency Contact Strip -->
+<section class="bg-primary py-4 px-8 flex flex-col md:flex-row items-center justify-center gap-8 text-on-primary">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-3xl">emergency</span>
+<span class="font-headline font-bold uppercase tracking-widest text-sm">24/7 Emergency Response</span>
+</div>
+<div class="h-4 w-px bg-on-primary/20 hidden md:block"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">call</span>
+<span class="text-xl font-bold font-headline">+1 (800) CLINIC-99</span>
+</div>
+<div class="h-4 w-px bg-on-primary/20 hidden md:block"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-medium">450 Medical Plaza, Central City</span>
+</div>
+</section>
+<!-- Services Overview (Bento Grid) -->
+<section class="py-24 px-8 lg:px-20 bg-surface">
+<div class="text-center mb-16">
+<h2 class="font-headline text-4xl font-bold tracking-tight text-on-background mb-4">World-Class Specializations</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Comprehensive medical services delivered with the latest technology and compassionate care.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+<!-- Large Featured Card -->
+<div class="md:col-span-2 md:row-span-2 bg-surface-container-lowest p-8 rounded-[2rem] flex flex-col justify-between group cursor-pointer hover:bg-primary transition-all duration-500">
+<div>
+<div class="w-16 h-16 bg-primary-fixed rounded-2xl flex items-center justify-center mb-8 group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">cardiology</span>
+</div>
+<h3 class="font-headline text-3xl font-bold mb-4 group-hover:text-white transition-colors">Cardiology</h3>
+<p class="text-on-surface-variant group-hover:text-white/80 transition-colors leading-relaxed">
+                            Advanced diagnostic imaging and surgical interventions for complex cardiovascular conditions, powered by state-of-the-art monitoring.
+                        </p>
+</div>
+<div class="mt-8 flex items-center gap-2 font-bold text-primary group-hover:text-white transition-colors">
+                        Explore Department <span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</div>
+<!-- Emergency -->
+<div class="bg-error-container p-6 rounded-[2rem] flex flex-col justify-between hover:scale-[1.02] transition-transform">
+<div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 shadow-sm">
+<span class="material-symbols-outlined text-error" data-weight="fill">emergency</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-error-container">Emergency Care</h3>
+<p class="text-sm text-on-error-container/70 mt-2">Immediate response teams available 24/7 for life-critical situations.</p>
+</div>
+<!-- Pediatrics -->
+<div class="bg-secondary-container p-6 rounded-[2rem] flex flex-col justify-between hover:scale-[1.02] transition-transform">
+<div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 shadow-sm">
+<span class="material-symbols-outlined text-secondary">child_care</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-secondary-container">Pediatrics</h3>
+<p class="text-sm text-on-secondary-container/70 mt-2">Specialized care for infants, children, and adolescents in a kid-friendly environment.</p>
+</div>
+<!-- Neurology -->
+<div class="bg-surface-container-lowest p-6 rounded-[2rem] flex flex-col justify-between border border-transparent hover:border-primary transition-all">
+<div class="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<h3 class="font-headline text-xl font-bold">Neurology</h3>
+<p class="text-sm text-on-surface-variant mt-2">Comprehensive brain and nervous system diagnostics and therapy.</p>
+</div>
+<!-- Pharmacy -->
+<div class="bg-surface-container-lowest p-6 rounded-[2rem] flex flex-col justify-between border border-transparent hover:border-primary transition-all">
+<div class="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">medical_services</span>
+</div>
+<h3 class="font-headline text-xl font-bold">In-house Pharmacy</h3>
+<p class="text-sm text-on-surface-variant mt-2">Expert medication management and automated prescription refills.</p>
+</div>
+</div>
+</section>
+<!-- Featured Doctors -->
+<section class="py-24 px-8 lg:px-20 bg-surface-container-low">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 max-w-7xl mx-auto">
+<div>
+<h2 class="font-headline text-4xl font-bold tracking-tight text-on-background mb-4">Our Elite Medical Staff</h2>
+<p class="text-on-surface-variant max-w-md">Meet the experts leading our specialized departments with decades of international experience.</p>
+</div>
+<button class="px-6 py-3 border border-outline-variant text-on-surface font-headline font-bold rounded-xl hover:bg-surface-container-high transition-all flex items-center gap-2">
+                    View All Staff <span class="material-symbols-outlined">group</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+<!-- Doctor 1 -->
+<div class="group">
+<div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/5]">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Portrait of a female surgeon in blue scrubs with a stethoscope, looking confident and kind in a clean medical setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxOdappMSpz1ImeP3cGaoAESTKzWwLUrFFZv86gZA2MAwmEH5NF_RGcOSuc4pwDs2NBsx5ZCfSzAFwj1lBKNDssQ063p1UjkTP5HpjSU0bGQaSqcolph7QNJwRFeRyOgfcXlDblKjVIO9pGUJKO5qY-Bm7dvtbwrgfHsneuX321PxwODAPgzoB9Ev0xzJJioExFQaM2sKOed_9_Nie1IhoHPA_IRRPTC_TNXBfj6avNfJoY-ZzTy9Zj4lnXGmjn95G0JrGtrH-w9k"/>
+<div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+<p class="text-primary font-bold text-sm uppercase tracking-widest mb-1">Chief Surgeon</p>
+<h4 class="font-headline text-xl font-bold">Dr. Elena Rodriguez</h4>
+</div>
+</div>
+</div>
+<!-- Doctor 2 -->
+<div class="group">
+<div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/5]">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Professional portrait of a male cardiologist in a white coat with modern medical equipment in the blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9WR-dB5JeXf9LQfyWXyztydq4_4AV4r7r0YeV2V8T-vmu1gZZ3RNvAGhRm9zwDkSjEB-Iu_OWwlzU9eXJ4ENmGb_jgWteYFyPH5XeOBrOV_61OBQxgNw5kSle2PA0Fi9t9bcV8DJ6ogO7Oyk4jOvOjh_e3cwSBxWIF3xqvyXKaTuy0yFUj_kQsxou_GMMX3ZUsrPzzI-LGQxdwn2mHQoxIswSxU-RFEnm09e9HOYAbo1ehAmZN-9ONL_L_Fy0SWfBfBkdVB5JWFk"/>
+<div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+<p class="text-primary font-bold text-sm uppercase tracking-widest mb-1">Cardiology Lead</p>
+<h4 class="font-headline text-xl font-bold">Dr. Julian Sterling</h4>
+</div>
+</div>
+</div>
+<!-- Doctor 3 -->
+<div class="group">
+<div class="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/5]">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Portrait of a friendly female pediatrician holding a digital tablet in a colorful clinic, smiling warmly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6NBuJ6_CNdOJZCI2ZhemDxn9QwWWlFZx4cUaunnOFcc8_jb0Jb3TcH1f5xclPNLahM2uTZni3sogTe9CMWrK4n83GayBlBw1CiGU9bWXPOjJ92SIF_AFb8-A9fI-XOtKKEw90gtcbu7NiQwLWRQFayz99GzWv7SM32ViDkByqB4lnWtTYFKAIvcDCzPpKTMmu-POZjSkM_eP6m4qk9Rx2SQA0DKOsBZbZ-vGRhw6I2TerhlyL4c4RtQJ4MllU8UiTAfPJRk5_75g"/>
+<div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+<p class="text-primary font-bold text-sm uppercase tracking-widest mb-1">Pediatric Oncology</p>
+<h4 class="font-headline text-xl font-bold">Dr. Sarah Whitmore</h4>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Appointment CTA -->
+<section class="py-24 px-8">
+<div class="max-w-6xl mx-auto brand-gradient rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold text-white mb-8 relative z-10 leading-tight">
+                    Ready to Start Your Journey <br/>to Better Health?
+                </h2>
+<p class="text-white/80 text-lg mb-12 max-w-2xl mx-auto relative z-10">
+                    Join thousands of patients who trust The Clinical Atelier for their comprehensive medical needs. Schedule your visit in seconds.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+<button class="bg-white text-primary px-10 py-4 rounded-xl font-headline font-bold text-lg hover:bg-surface-container transition-all">
+                        Book Appointment Now
+                    </button>
+<button class="bg-transparent border border-white/40 text-white px-10 py-4 rounded-xl font-headline font-bold text-lg hover:bg-white/10 transition-all">
+                        Call for Consultation
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-gray-50 dark:bg-gray-950 w-full border-t border-gray-200 dark:border-gray-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-12 max-w-7xl mx-auto gap-12">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-['Manrope'] font-bold text-2xl text-gray-900 dark:text-white mb-2">The Clinical Atelier</span>
+<p class="text-gray-500 font-body text-sm text-center md:text-left max-w-xs">Elevating the standard of clinical excellence through digital innovation and human care.</p>
+</div>
+<div class="flex gap-8 font-['Inter'] text-xs uppercase tracking-widest">
+<a class="text-gray-500 hover:underline decoration-blue-500 transition-all opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-gray-500 hover:underline decoration-blue-500 transition-all opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-gray-500 hover:underline decoration-blue-500 transition-all opacity-80 hover:opacity-100" href="#">Patient Rights</a>
+<a class="text-gray-500 hover:underline decoration-blue-500 transition-all opacity-80 hover:opacity-100" href="#">Careers</a>
+</div>
+</div>
+<div class="px-12 py-6 border-t border-gray-200/50 dark:border-gray-800/50 flex flex-col md:flex-row justify-between items-center text-gray-500 text-[10px] uppercase tracking-[0.2em] font-['Inter']">
+<span>© 2024 The Clinical Atelier. All rights reserved.</span>
+<div class="flex gap-6 mt-4 md:mt-0">
+<span class="material-symbols-outlined text-sm">social_leaderboard</span>
+<span class="material-symbols-outlined text-sm">potted_plant</span>
+<span class="material-symbols-outlined text-sm">share</span>
+</div>
+</div>
+</footer>
+</body></html>
