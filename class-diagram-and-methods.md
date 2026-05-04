@@ -10,77 +10,123 @@ This project follows the MVC pattern:
 
 ```mermaid
 classDiagram
-    class BaseController
-    class LoginController
-    class RegisterController
-    class AdminController
-    class DoctorController
-    class PatientController
-    class AuthService
-    class DoctorService
-    class PatientService
-    class AppointmentService
-    class BillingService
-    class MedicalRecordService
-    class UserDAO
-    class DoctorDAO
-    class PatientDAO
-    class DepartmentDAO
-    class AppointmentDAO
-    class BillDAO
-    class MedicalRecordDAO
-    class PrescriptionDAO
-    class DBConnection
-    class User
-    class Doctor
-    class Patient
-    class Department
-    class Appointment
-    class Bill
-    class MedicalRecord
-    class Prescription
+    class User {
+        -int userId
+        -String fullName
+        -String email
+        -String phone
+        -String password
+        -String role
+        -boolean active
+        -int failedAttempts
+        -Timestamp lockedUntil
+        -Timestamp createdAt
+    }
 
-    BaseController <|-- LoginController
-    BaseController <|-- RegisterController
-    BaseController <|-- AdminController
-    BaseController <|-- DoctorController
-    BaseController <|-- PatientController
+    class Patient {
+        -int patientId
+        -int userId
+        -boolean active
+        -Date dob
+        -String gender
+        -String bloodGroup
+        -String address
+        -String emergencyContact
+        -String fullName
+        -String email
+        -String phone
+        -Timestamp createdAt
+    }
 
-    LoginController --> AuthService
-    RegisterController --> AuthService
-    AdminController --> DoctorService
-    AdminController --> PatientService
-    DoctorController --> AppointmentService
-    DoctorController --> MedicalRecordService
-    PatientController --> AppointmentService
-    PatientController --> BillingService
-    PatientController --> PatientService
+    class Doctor {
+        -int doctorId
+        -int userId
+        -int deptId
+        -boolean active
+        -String specialization
+        -String qualification
+        -int experienceYrs
+        -double consultationFee
+        -String availableDays
+        -String fullName
+        -String email
+        -String phone
+        -String deptName
+        -Timestamp createdAt
+    }
 
-    AuthService --> UserDAO
-    AuthService --> PatientDAO
-    DoctorService --> DoctorDAO
-    PatientService --> PatientDAO
-    AppointmentService --> AppointmentDAO
-    BillingService --> BillDAO
-    MedicalRecordService --> MedicalRecordDAO
+    class Department {
+        -int deptId
+        -String deptName
+        -String description
+        -Timestamp createdAt
+    }
 
-    UserDAO --> DBConnection
-    DoctorDAO --> DBConnection
-    PatientDAO --> DBConnection
-    DepartmentDAO --> DBConnection
-    AppointmentDAO --> DBConnection
-    BillDAO --> DBConnection
-    MedicalRecordDAO --> DBConnection
-    PrescriptionDAO --> DBConnection
+    class Appointment {
+        -int apptId
+        -int patientId
+        -int doctorId
+        -Date apptDate
+        -Time apptTime
+        -String status
+        -String reason
+        -String notes
+        -Timestamp createdAt
+        -String patientName
+        -String doctorName
+        -String deptName
+    }
 
-    UserDAO --> User
-    DoctorDAO --> Doctor
-    PatientDAO --> Patient
-    DepartmentDAO --> Department
-    AppointmentDAO --> Appointment
-    BillDAO --> Bill
-    MedicalRecordDAO --> MedicalRecord
-    PrescriptionDAO --> Prescription
+    class MedicalRecord {
+        -int recordId
+        -int patientId
+        -int doctorId
+        -int apptId
+        -String diagnosis
+        -String symptoms
+        -String treatment
+        -Date recordDate
+        -String doctorName
+        -String patientName
+        -List~Prescription~ prescriptions
+    }
+
+    class Prescription {
+        -int prescriptionId
+        -int recordId
+        -String medicineName
+        -String dosage
+        -String frequency
+        -String duration
+        -String instructions
+    }
+
+    class Bill {
+        -int billId
+        -int patientId
+        -int apptId
+        -double consultationFee
+        -double medicineFee
+        -double testFee
+        -double lateFee
+        -double totalAmount
+        -double paidAmount
+        -String status
+        -Timestamp billDate
+        -String patientName
+    }
+
+    User "1" --> "0..1" Patient : owns
+    User "1" --> "0..1" Doctor : owns
+    Department "1" --> "0..*" Doctor : has
+    Patient "1" --> "0..*" Appointment : books
+    Doctor "1" --> "0..*" Appointment : handles
+    Patient "1" --> "0..*" MedicalRecord : has
+    Doctor "1" --> "0..*" MedicalRecord : writes
+    Appointment "0..1" --> "0..1" MedicalRecord : creates
+    MedicalRecord "1" --> "0..*" Prescription : contains
+    Patient "1" --> "0..*" Bill : receives
+    Appointment "0..1" --> "0..1" Bill : generates
 ```
 
 ## 1. Controller Layer
@@ -336,4 +382,3 @@ These JSP pages do not contain main Java methods. Their purpose is to:
 - display data sent by controllers
 - collect form input from users
 - show success or error messages
-
