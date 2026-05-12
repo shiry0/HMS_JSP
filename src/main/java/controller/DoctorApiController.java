@@ -31,6 +31,7 @@ public class DoctorApiController extends BaseController {
                 json.append("{\"doctorId\":").append(doctor.getDoctorId())
                         .append(",\"fullName\":\"").append(escapeJson(doctor.getFullName()))
                         .append("\",\"specialization\":\"").append(escapeJson(doctor.getSpecialization()))
+                        .append("\",\"availableDays\":\"").append(escapeJson(doctor.getAvailableDays()))
                         .append("\"}");
             }
             json.append(']');

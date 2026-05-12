@@ -115,7 +115,7 @@ public class PatientDAO {
     }
 
     private String baseSelect() {
-        return "SELECT p.*, u.full_name, u.email, u.phone, u.is_active, u.created_at "
+        return "SELECT p.*, u.full_name, u.email, u.phone, u.is_active, u.locked_until, u.created_at "
                 + "FROM patients p JOIN users u ON p.user_id = u.user_id";
     }
 
@@ -132,6 +132,7 @@ public class PatientDAO {
         patient.setFullName(rs.getString("full_name"));
         patient.setEmail(rs.getString("email"));
         patient.setPhone(rs.getString("phone"));
+        patient.setLockedUntil(rs.getTimestamp("locked_until"));
         patient.setCreatedAt(rs.getTimestamp("created_at"));
         return patient;
     }

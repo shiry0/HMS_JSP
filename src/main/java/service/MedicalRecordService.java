@@ -78,6 +78,24 @@ public class MedicalRecordService {
         }
     }
 
+    public void deleteRecord(int recordId, int doctorUserId) throws Exception {
+        Doctor doctor = doctorDAO.getDoctorByUserId(doctorUserId);
+        if (doctor == null) {
+            throw new Exception("Doctor profile not found.");
+        }
+
+        MedicalRecord record = medicalRecordDAO.getRecordById(recordId);
+        if (record == null) {
+            throw new Exception("Medical record not found.");
+        }
+        if (record.getDoctorId() != doctor.getDoctorId()) {
+            throw new Exception("You are not allowed to delete this medical record.");
+        }
+
+        prescriptionDAO.deleteByRecordId(recordId);
+        medicalRecordDAO.deleteRecord(recordId);
+    }
+
     private List<Prescription> buildPrescriptions(int recordId, String[] medicineNames, String[] dosages,
             String[] frequencies, String[] durations, String[] instructions) {
         List<Prescription> prescriptions = new ArrayList<>();

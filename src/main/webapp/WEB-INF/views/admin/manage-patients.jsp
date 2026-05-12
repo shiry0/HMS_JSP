@@ -24,10 +24,86 @@ Patient editingPatient = (Patient) request.getAttribute("editingPatient");
     </div>
 </section>
 
-<section class="grid-two">
-    <div class="card">
-        <span class="section-kicker"><%= editingPatient == null ? "New Patient" : "Editing Patient" %></span>
-        <h2 class="section-title"><%= editingPatient == null ? "Add Patient" : "Edit Patient" %></h2>
+<section class="card admin-directory-card">
+    <div class="toolbar">
+        <div class="toolbar-block">
+            <span class="section-kicker">Patient Directory</span>
+            <h2 class="section-title">Patient List</h2>
+        </div>
+        <button class="btn btn-primary" type="button" id="openPatientModal">
+            <span class="material-symbols-outlined">add</span>
+            Add Patient
+        </button>
+    </div>
+    <div class="table-wrap admin-table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Blood Group</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (patients == null || patients.isEmpty()) { %>
+                    <tr><td colspan="6">No patients found.</td></tr>
+                <% } else {
+                    for (Patient patient : patients) { %>
+                    <tr>
+                        <td><%= patient.getFullName() %></td>
+                        <td><%= patient.getEmail() %></td>
+                        <td><%= patient.getPhone() %></td>
+                        <td><%= patient.getBloodGroup() == null ? "-" : patient.getBloodGroup() %></td>
+                        <td>
+                            <% if (patient.isLocked()) { %>
+                                <span class="badge badge-pending">Locked</span>
+                            <% } else { %>
+                                <span class="badge <%= patient.isActive() ? "badge-confirmed" : "badge-cancelled" %>"><%= patient.isActive() ? "Active" : "Inactive" %></span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <div class="inline-actions">
+                                <a class="btn btn-secondary" href="<%= request.getContextPath() %>/admin/manage-patients?editPatientId=<%= patient.getPatientId() %>">Edit</a>
+                                <% if (patient.isLocked()) { %>
+                                <form method="post" action="<%= request.getContextPath() %>/admin/unblock-patient">
+                                    <input type="hidden" name="patientId" value="<%= patient.getPatientId() %>">
+                                    <button class="btn btn-warning" type="submit">Unblock</button>
+                                </form>
+                                <% } %>
+                                <form method="post" action="<%= request.getContextPath() %>/admin/delete-patient">
+                                    <input type="hidden" name="patientId" value="<%= patient.getPatientId() %>">
+                                    <button class="btn btn-danger btn-delete" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <%  }
+                } %>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div class="modal-backdrop admin-modal <%= editingPatient != null || request.getAttribute("error") != null ? "is-open" : "" %>" id="patientModal" aria-hidden="<%= editingPatient != null || request.getAttribute("error") != null ? "false" : "true" %>" <%= editingPatient != null ? "data-reset-url=\"" + request.getContextPath() + "/admin/manage-patients\"" : "" %>>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="patientModalTitle">
+        <div class="modal-header">
+            <div>
+                <span class="section-kicker"><%= editingPatient == null ? "New Patient" : "Editing Patient" %></span>
+                <h2 class="section-title" id="patientModalTitle"><%= editingPatient == null ? "Add Patient" : "Edit Patient" %></h2>
+            </div>
+            <% if (editingPatient != null) { %>
+                <a class="modal-close" href="<%= request.getContextPath() %>/admin/manage-patients" aria-label="Close patient form">
+                    <span class="material-symbols-outlined">close</span>
+                </a>
+            <% } else { %>
+                <button class="modal-close" type="button" data-modal-close aria-label="Close patient form">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            <% } %>
+        </div>
         <% if (request.getAttribute("error") != null) { %>
             <div class="alert alert-error"><%= request.getAttribute("error") %></div>
         <% } %>
@@ -91,48 +167,5 @@ Patient editingPatient = (Patient) request.getAttribute("editingPatient");
             </div>
         </form>
     </div>
-
-    <div class="card">
-        <span class="section-kicker">Patient Directory</span>
-        <h2 class="section-title">Patient List</h2>
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Blood Group</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if (patients == null || patients.isEmpty()) { %>
-                        <tr><td colspan="6">No patients found.</td></tr>
-                    <% } else {
-                        for (Patient patient : patients) { %>
-                        <tr>
-                            <td><%= patient.getFullName() %></td>
-                            <td><%= patient.getEmail() %></td>
-                            <td><%= patient.getPhone() %></td>
-                            <td><%= patient.getBloodGroup() == null ? "-" : patient.getBloodGroup() %></td>
-                            <td><span class="badge <%= patient.isActive() ? "badge-confirmed" : "badge-cancelled" %>"><%= patient.isActive() ? "Active" : "Inactive" %></span></td>
-                            <td>
-                                <div class="inline-actions">
-                                    <a class="btn btn-secondary" href="<%= request.getContextPath() %>/admin/manage-patients?editPatientId=<%= patient.getPatientId() %>">Edit</a>
-                                    <form method="post" action="<%= request.getContextPath() %>/admin/delete-patient">
-                                        <input type="hidden" name="patientId" value="<%= patient.getPatientId() %>">
-                                        <button class="btn btn-danger btn-delete" type="submit">Delete</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    <%  }
-                    } %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

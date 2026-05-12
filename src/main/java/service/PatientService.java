@@ -97,11 +97,44 @@ public class PatientService {
         }
     }
 
+    public void updatePatientByDoctor(int patientId, String fullName, java.sql.Date dob, String gender,
+            String bloodGroup, String address, String emergencyContact) throws Exception {
+        Patient patient = patientDAO.getPatientById(patientId);
+        if (patient == null) {
+            throw new Exception("Patient not found.");
+        }
+        if (!ValidationUtil.isValidName(fullName)) {
+            throw new Exception("Name must contain letters and spaces only.");
+        }
+        if (dob != null && !dob.before(new java.sql.Date(System.currentTimeMillis()))) {
+            throw new Exception("Date of birth must be in the past.");
+        }
+
+        User user = userDAO.getUserById(patient.getUserId());
+        user.setFullName(fullName.trim());
+        userDAO.updateBasicProfile(user);
+
+        patient.setDob(dob);
+        patient.setGender(gender);
+        patient.setBloodGroup(bloodGroup);
+        patient.setAddress(address == null ? "" : address.trim());
+        patient.setEmergencyContact(emergencyContact == null ? "" : emergencyContact.trim());
+        patientDAO.updatePatient(patient);
+    }
+
     public void deletePatient(int patientId) throws Exception {
         if (patientDAO.getPatientById(patientId) == null) {
             throw new Exception("Patient not found.");
         }
         patientDAO.deletePatient(patientId);
+    }
+
+    public void unblockPatient(int patientId) throws Exception {
+        Patient patient = patientDAO.getPatientById(patientId);
+        if (patient == null) {
+            throw new Exception("Patient not found.");
+        }
+        userDAO.clearLoginAttempts(patient.getUserId());
     }
 
     private void validatePatientInput(String fullName, String email, String phone, java.sql.Date dob, String address)

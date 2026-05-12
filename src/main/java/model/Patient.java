@@ -15,13 +15,14 @@ public class Patient {
     private String fullName;
     private String email;
     private String phone;
+    private Timestamp lockedUntil;
     private Timestamp createdAt;
 
     public Patient() {
     }
 
     public Patient(int patientId, int userId, boolean active, Date dob, String gender, String bloodGroup,
-            String address, String emergencyContact, String fullName, String email, String phone,
+            String address, String emergencyContact, String fullName, String email, String phone, Timestamp lockedUntil,
             Timestamp createdAt) {
         this.patientId = patientId;
         this.userId = userId;
@@ -34,6 +35,7 @@ public class Patient {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
+        this.lockedUntil = lockedUntil;
         this.createdAt = createdAt;
     }
 
@@ -131,5 +133,17 @@ public class Patient {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Timestamp getLockedUntil() {
+        return lockedUntil;
+    }
+
+    public void setLockedUntil(Timestamp lockedUntil) {
+        this.lockedUntil = lockedUntil;
+    }
+
+    public boolean isLocked() {
+        return lockedUntil != null && lockedUntil.after(new Timestamp(System.currentTimeMillis()));
     }
 }

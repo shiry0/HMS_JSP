@@ -15,11 +15,19 @@ public class ForgotPasswordController extends BaseController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (getLoggedUser(req) != null) {
+            redirectLoggedUser(req, resp);
+            return;
+        }
         forward(req, resp, "/WEB-INF/views/auth/forgot-password.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (getLoggedUser(req) != null) {
+            redirectLoggedUser(req, resp);
+            return;
+        }
         try {
             authService.resetPassword(req.getParameter("email"), req.getParameter("phone"),
                     req.getParameter("newPassword"));

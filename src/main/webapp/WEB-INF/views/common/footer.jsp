@@ -28,6 +28,28 @@ boolean appLayout = footerUser != null;
             </div>
         </footer>
     <% } %>
-    <script src="<%= request.getContextPath() %>/js/main.js"></script>
+    <div class="modal-backdrop confirm-modal" id="confirmModal" aria-hidden="true">
+        <div class="modal-panel modal-panel-confirm" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle">
+            <div class="modal-header">
+                <div>
+                    <span class="section-kicker confirm-kicker">Warning</span>
+                    <h2 class="section-title" id="confirmModalTitle">Confirm action</h2>
+                </div>
+                <button class="modal-close" type="button" id="cancelConfirmIcon" aria-label="Close warning">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <p class="modal-message" id="confirmModalMessage">This action cannot be undone.</p>
+            <div class="form-group confirm-reason-field" id="confirmReasonField" hidden>
+                <label for="confirmReasonInput">Cancellation Reason</label>
+                <textarea id="confirmReasonInput" rows="3" placeholder="Tell the patient why this appointment is being cancelled."></textarea>
+            </div>
+            <div class="inline-actions modal-actions">
+                <button class="btn btn-secondary" type="button" id="cancelConfirm">Cancel</button>
+                <button class="btn btn-danger" type="button" id="acceptConfirm">Delete</button>
+            </div>
+        </div>
+    </div>
+    <script src="<%= request.getContextPath() %>/js/main.js?v=20260512-department-doctors"></script>
 </body>
 </html>

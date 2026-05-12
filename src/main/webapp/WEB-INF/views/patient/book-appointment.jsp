@@ -36,12 +36,15 @@ Integer selectedDeptId = (Integer) request.getAttribute("selectedDeptId");
         </div>
         <div class="form-group">
             <label for="doctorId">Doctor</label>
-            <select id="doctorId" name="doctorId" required>
+            <select id="doctorId" name="doctorId" required <%= selectedDeptId == null || selectedDeptId == 0 ? "disabled" : "" %>>
                 <option value="">-- Select Doctor --</option>
-                <% for (Doctor doctor : doctors) { %>
-                    <option value="<%= doctor.getDoctorId() %>">Dr. <%= doctor.getFullName() %> - <%= doctor.getSpecialization() %></option>
-                <% } %>
+                <% if (selectedDeptId != null && selectedDeptId > 0) {
+                    for (Doctor doctor : doctors) { %>
+                        <option value="<%= doctor.getDoctorId() %>" data-available-days="<%= doctor.getAvailableDays() == null ? "" : doctor.getAvailableDays().replace("\"", "&quot;") %>">Dr. <%= doctor.getFullName() %> - <%= doctor.getSpecialization() %><%= doctor.getAvailableDays() == null || doctor.getAvailableDays().isBlank() ? "" : " (" + doctor.getAvailableDays() + ")" %></option>
+                <%  }
+                } %>
             </select>
+            <p class="form-note" id="doctorAvailabilityNote"><%= selectedDeptId == null || selectedDeptId == 0 ? "Select a department first." : "Select a doctor to see available days." %></p>
         </div>
         <div class="form-group">
             <label>Appointment Date</label>

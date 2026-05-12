@@ -177,6 +177,17 @@ public class AppointmentDAO {
         updateStatus(apptId, "Cancelled");
     }
 
+    public void cancelAppointment(int apptId, String notes) throws SQLException {
+        String sql = "UPDATE appointments SET status = ?, notes = ? WHERE appt_id = ?";
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "Cancelled");
+            ps.setString(2, notes);
+            ps.setInt(3, apptId);
+            ps.executeUpdate();
+        }
+    }
+
     public boolean isDoctorAvailable(int doctorId, Date date, Time time) throws SQLException {
         String sql = "SELECT COUNT(*) FROM appointments WHERE doctor_id = ? AND appt_date = ? AND appt_time = ? "
                 + "AND status <> 'Cancelled'";

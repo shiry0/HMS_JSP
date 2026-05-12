@@ -16,6 +16,7 @@ import dao.DoctorDAO;
 import dao.MedicalRecordDAO;
 import dao.PatientDAO;
 import dao.PrescriptionDAO;
+import model.Appointment;
 import model.Doctor;
 import model.MedicalRecord;
 import model.Patient;
@@ -81,7 +82,7 @@ public class PatientController extends BaseController {
                     break;
                 case "/cancel":
                     appointmentService.cancelAppointment(intParam(req, "apptId"), getLoggedUser(req).getUserId(), "patient");
-                    setFlash(req, "success", "Appointment cancelled successfully.");
+                    setFlash(req, "success", "Appointment cancelled. A 50% consultation fee has been added to billing.");
                     redirect(req, resp, "/patient/my-appointments");
                     break;
                 case "/pay":
@@ -148,8 +149,13 @@ public class PatientController extends BaseController {
 
     private void showAppointments(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         Patient patient = patientDAO.getPatientByUserId(getLoggedUser(req).getUserId());
+        String keyword = req.getParameter("q");
+        String status = req.getParameter("status");
         req.setAttribute("pageTitle", "My Appointments");
-        req.setAttribute("appointments", appointmentDAO.getAppointmentsByPatient(patient.getPatientId()));
+        req.setAttribute("appointments",
+                filterAppointments(appointmentDAO.getAppointmentsByPatient(patient.getPatientId()), keyword, status));
+        req.setAttribute("searchKeyword", keyword);
+        req.setAttribute("selectedStatus", status);
         forward(req, resp, "/WEB-INF/views/patient/my-appointments.jsp");
     }
 
@@ -176,6 +182,24 @@ public class PatientController extends BaseController {
         req.setAttribute("pageTitle", "My Profile");
         req.setAttribute("patient", patientDAO.getPatientByUserId(getLoggedUser(req).getUserId()));
         forward(req, resp, "/WEB-INF/views/patient/profile.jsp");
+    }
+
+    private List<Appointment> filterAppointments(List<Appointment> appointments, String keyword, String status) {
+        String normalizedKeyword = keyword == null ? "" : keyword.trim().toLowerCase();
+        String normalizedStatus = status == null ? "" : status.trim();
+        return appointments.stream()
+                .filter(appointment -> normalizedStatus.isBlank()
+                        || normalizedStatus.equalsIgnoreCase(appointment.getStatus()))
+                .filter(appointment -> normalizedKeyword.isBlank()
+                        || containsIgnoreCase(appointment.getDoctorName(), normalizedKeyword)
+                        || containsIgnoreCase(appointment.getDeptName(), normalizedKeyword)
+                        || containsIgnoreCase(appointment.getReason(), normalizedKeyword)
+                        || containsIgnoreCase(appointment.getStatus(), normalizedKeyword))
+                .toList();
+    }
+
+    private boolean containsIgnoreCase(String value, String keyword) {
+        return value != null && value.toLowerCase().contains(keyword);
     }
 }
 

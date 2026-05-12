@@ -64,6 +64,34 @@ public class MedicalRecordDAO {
         }
     }
 
+    public List<MedicalRecord> getRecordsByDoctor(int doctorId, String keyword) throws SQLException {
+        List<MedicalRecord> records = new ArrayList<>();
+        StringBuilder sql = new StringBuilder(baseSelect()).append(" WHERE mr.doctor_id = ?");
+        boolean hasKeyword = keyword != null && !keyword.isBlank();
+        if (hasKeyword) {
+            sql.append(" AND (LOWER(pu.full_name) LIKE ? OR LOWER(mr.diagnosis) LIKE ? OR LOWER(mr.symptoms) LIKE ? OR LOWER(mr.treatment) LIKE ?)");
+        }
+        sql.append(" ORDER BY mr.record_date DESC");
+
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql.toString())) {
+            ps.setInt(1, doctorId);
+            if (hasKeyword) {
+                String pattern = "%" + keyword.trim().toLowerCase() + "%";
+                ps.setString(2, pattern);
+                ps.setString(3, pattern);
+                ps.setString(4, pattern);
+                ps.setString(5, pattern);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    records.add(mapRecord(rs));
+                }
+            }
+        }
+        return records;
+    }
+
     public void updateRecord(MedicalRecord record) throws SQLException {
         String sql = "UPDATE medical_records SET diagnosis = ?, symptoms = ?, treatment = ?, record_date = ? WHERE record_id = ?";
         try (Connection con = DBConnection.getConnection();
@@ -73,6 +101,15 @@ public class MedicalRecordDAO {
             ps.setString(3, record.getTreatment());
             ps.setDate(4, record.getRecordDate());
             ps.setInt(5, record.getRecordId());
+            ps.executeUpdate();
+        }
+    }
+
+    public void deleteRecord(int recordId) throws SQLException {
+        String sql = "DELETE FROM medical_records WHERE record_id = ?";
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, recordId);
             ps.executeUpdate();
         }
     }

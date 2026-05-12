@@ -51,7 +51,11 @@ List<Appointment> appointments = (List<Appointment>) request.getAttribute("appoi
                 <% if (appointments == null || appointments.isEmpty()) { %>
                     <tr><td colspan="5">No appointments scheduled for today.</td></tr>
                 <% } else {
-                    for (Appointment appointment : appointments) { %>
+                    for (Appointment appointment : appointments) {
+                        boolean isPending = "Pending".equalsIgnoreCase(appointment.getStatus());
+                        boolean isFinalStatus = "Completed".equalsIgnoreCase(appointment.getStatus())
+                                || "Cancelled".equalsIgnoreCase(appointment.getStatus());
+                    %>
                     <tr>
                         <td><%= appointment.getPatientName() %></td>
                         <td><%= appointment.getApptTime() %></td>
@@ -59,16 +63,24 @@ List<Appointment> appointments = (List<Appointment>) request.getAttribute("appoi
                         <td><span class="badge badge-<%= appointment.getStatus().toLowerCase() %>"><%= appointment.getStatus() %></span></td>
                         <td>
                             <div class="inline-actions">
+                                <% if (isPending) { %>
                                 <form method="post" action="<%= request.getContextPath() %>/doctor/update-appointment">
                                     <input type="hidden" name="apptId" value="<%= appointment.getApptId() %>">
                                     <input type="hidden" name="action" value="confirm">
                                     <button class="btn btn-warning" type="submit">Confirm</button>
                                 </form>
+                                <% } %>
+                                <% if (!isFinalStatus) { %>
                                 <form method="post" action="<%= request.getContextPath() %>/doctor/update-appointment">
                                     <input type="hidden" name="apptId" value="<%= appointment.getApptId() %>">
                                     <input type="hidden" name="action" value="complete">
                                     <button class="btn btn-success" type="submit">Complete</button>
                                 </form>
+                                <form method="post" action="<%= request.getContextPath() %>/doctor/cancel-appointment">
+                                    <input type="hidden" name="apptId" value="<%= appointment.getApptId() %>">
+                                    <button class="btn btn-danger btn-cancel-no-fee" type="submit">Cancel</button>
+                                </form>
+                                <% } %>
                                 <a class="btn btn-secondary" href="<%= request.getContextPath() %>/doctor/patient-record?patientId=<%= appointment.getPatientId() %>&apptId=<%= appointment.getApptId() %>">Records</a>
                             </div>
                         </td>

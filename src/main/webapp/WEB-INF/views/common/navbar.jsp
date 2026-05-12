@@ -9,11 +9,8 @@ boolean homeActive = "/".equals(currentPath) || "".equals(currentPath) || "/inde
 <header class="public-nav">
     <div class="public-nav-inner">
         <a class="nav-brand" href="<%= request.getContextPath() %>/index.jsp">
-            <span class="brand-mark"><span class="material-symbols-outlined">health_and_safety</span></span>
-            <span class="brand-copy">
-                <strong>MediCore HMS</strong>
-                <small>Hospital management reimagined</small>
-            </span>
+            <img class="brand-logo" src="<%= request.getContextPath() %>/images/logo.png" alt="MediCore HMS">
+            <span class="sr-only">Hospital management reimagined</span>
         </a>
         <nav class="nav-links">
             <a class="nav-link <%= homeActive ? "is-active" : "" %>" href="<%= request.getContextPath() %>/index.jsp">Home</a>
@@ -29,24 +26,24 @@ boolean homeActive = "/".equals(currentPath) || "".equals(currentPath) || "/inde
 <% } else { %>
 <aside class="app-sidebar">
     <a class="sidebar-brand" href="<%= request.getContextPath() %>/<%= "admin".equalsIgnoreCase(role) ? "admin/dashboard" : ("doctor".equalsIgnoreCase(role) ? "doctor/dashboard" : "patient/dashboard") %>">
-        <span class="brand-mark"><span class="material-symbols-outlined">health_and_safety</span></span>
-        <span class="brand-copy">
-            <strong>MediCore HMS</strong>
-            <small><%= role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() %> workspace</small>
-        </span>
+        <img class="brand-logo sidebar-brand-logo" src="<%= request.getContextPath() %>/images/logo.png" alt="MediCore HMS">
+        <span class="sr-only"><%= role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() %> workspace</span>
     </a>
     <p class="sidebar-section-label">Navigation</p>
     <nav class="sidebar-nav">
         <% if ("admin".equalsIgnoreCase(role)) { %>
+            <a class="sidebar-link <%= "/news".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/news"><span class="material-symbols-outlined">newspaper</span><span>Medical News</span></a>
             <a class="sidebar-link <%= "/admin/dashboard".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/admin/dashboard"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
             <a class="sidebar-link <%= "/admin/manage-doctors".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/admin/manage-doctors"><span class="material-symbols-outlined">medical_services</span><span>Doctors</span></a>
             <a class="sidebar-link <%= "/admin/manage-patients".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/admin/manage-patients"><span class="material-symbols-outlined">groups</span><span>Patients</span></a>
             <a class="sidebar-link <%= "/admin/departments".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/admin/departments"><span class="material-symbols-outlined">apartment</span><span>Departments</span></a>
         <% } else if ("doctor".equalsIgnoreCase(role)) { %>
+            <a class="sidebar-link <%= "/news".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/news"><span class="material-symbols-outlined">newspaper</span><span>Medical News</span></a>
             <a class="sidebar-link <%= "/doctor/dashboard".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/doctor/dashboard"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
             <a class="sidebar-link <%= "/doctor/appointments".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/doctor/appointments"><span class="material-symbols-outlined">event_upcoming</span><span>Appointments</span></a>
-            <a class="sidebar-link <%= "/doctor/patient-record".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/doctor/appointments"><span class="material-symbols-outlined">description</span><span>Patient Records</span></a>
+            <a class="sidebar-link <%= "/doctor/records".equals(currentPath) || "/doctor/patient-record".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/doctor/records"><span class="material-symbols-outlined">description</span><span>Patient Records</span></a>
         <% } else { %>
+            <a class="sidebar-link <%= "/news".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/news"><span class="material-symbols-outlined">newspaper</span><span>Medical News</span></a>
             <a class="sidebar-link <%= "/patient/dashboard".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/patient/dashboard"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
             <a class="sidebar-link <%= "/patient/book-appointment".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/patient/book-appointment"><span class="material-symbols-outlined">event_available</span><span>Book Appointment</span></a>
             <a class="sidebar-link <%= "/patient/my-appointments".equals(currentPath) ? "is-active" : "" %>" href="<%= request.getContextPath() %>/patient/my-appointments"><span class="material-symbols-outlined">event</span><span>My Appointments</span></a>

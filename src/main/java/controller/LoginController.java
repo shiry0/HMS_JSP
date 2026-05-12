@@ -17,6 +17,10 @@ public class LoginController extends BaseController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (getLoggedUser(req) != null) {
+            redirectLoggedUser(req, resp);
+            return;
+        }
         forward(req, resp, "/WEB-INF/views/auth/login.jsp");
     }
 
@@ -28,13 +32,7 @@ public class LoginController extends BaseController {
             session.setAttribute("loggedUser", user);
             session.setAttribute("role", user.getRole());
 
-            if ("admin".equalsIgnoreCase(user.getRole())) {
-                redirect(req, resp, "/admin/dashboard");
-            } else if ("doctor".equalsIgnoreCase(user.getRole())) {
-                redirect(req, resp, "/doctor/dashboard");
-            } else {
-                redirect(req, resp, "/patient/dashboard");
-            }
+            redirect(req, resp, dashboardPathFor(user));
         } catch (Exception e) {
             req.setAttribute("error", e.getMessage());
             forward(req, resp, "/WEB-INF/views/auth/login.jsp");

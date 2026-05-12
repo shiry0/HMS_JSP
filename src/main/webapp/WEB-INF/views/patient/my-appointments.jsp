@@ -7,12 +7,29 @@ if (session.getAttribute("loggedUser") == null) {
     return;
 }
 List<Appointment> appointments = (List<Appointment>) request.getAttribute("appointments");
+String searchKeyword = (String) request.getAttribute("searchKeyword");
+String selectedStatus = (String) request.getAttribute("selectedStatus");
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <section class="card">
-    <span class="page-eyebrow">Patient Workspace</span>
-    <h1 class="section-title">My Appointments</h1>
-    <p class="section-subtitle">Check visit status and cancel upcoming bookings.</p>
+    <div class="toolbar">
+        <div class="toolbar-block">
+            <span class="page-eyebrow">Patient Workspace</span>
+            <h1 class="section-title">My Appointments</h1>
+            <p class="section-subtitle">Check visit status and cancel upcoming bookings.</p>
+        </div>
+        <form method="get" action="<%= request.getContextPath() %>/patient/my-appointments" class="search-row appointment-search">
+            <input type="text" name="q" placeholder="Search doctor, department, or reason" value="<%= searchKeyword == null ? "" : searchKeyword %>">
+            <select name="status">
+                <option value="">All Status</option>
+                <option value="Pending" <%= "Pending".equalsIgnoreCase(selectedStatus) ? "selected" : "" %>>Pending</option>
+                <option value="Confirmed" <%= "Confirmed".equalsIgnoreCase(selectedStatus) ? "selected" : "" %>>Confirmed</option>
+                <option value="Completed" <%= "Completed".equalsIgnoreCase(selectedStatus) ? "selected" : "" %>>Completed</option>
+                <option value="Cancelled" <%= "Cancelled".equalsIgnoreCase(selectedStatus) ? "selected" : "" %>>Cancelled</option>
+            </select>
+            <button class="btn btn-secondary" type="submit">Search</button>
+        </form>
+    </div>
     <% if (request.getAttribute("error") != null) { %>
         <div class="alert alert-error"><%= request.getAttribute("error") %></div>
     <% } %>
@@ -40,12 +57,17 @@ List<Appointment> appointments = (List<Appointment>) request.getAttribute("appoi
                         <td><%= appointment.getDoctorName() %></td>
                         <td><%= appointment.getDeptName() %></td>
                         <td><span class="badge badge-<%= appointment.getStatus().toLowerCase() %>"><%= appointment.getStatus() %></span></td>
-                        <td><%= appointment.getReason() %></td>
+                        <td>
+                            <%= appointment.getReason() %>
+                            <% if ("Cancelled".equalsIgnoreCase(appointment.getStatus()) && appointment.getNotes() != null && !appointment.getNotes().isBlank()) { %>
+                                <p class="form-note"><strong>Cancellation reason:</strong> <%= appointment.getNotes() %></p>
+                            <% } %>
+                        </td>
                         <td>
                             <% if (!"Completed".equalsIgnoreCase(appointment.getStatus()) && !"Cancelled".equalsIgnoreCase(appointment.getStatus())) { %>
                             <form method="post" action="<%= request.getContextPath() %>/patient/cancel">
                                 <input type="hidden" name="apptId" value="<%= appointment.getApptId() %>">
-                                <button class="btn btn-danger" type="submit">Cancel</button>
+                                <button class="btn btn-danger btn-cancel-appointment" type="submit">Cancel</button>
                             </form>
                             <% } %>
                         </td>

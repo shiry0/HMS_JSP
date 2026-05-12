@@ -24,12 +24,42 @@ Integer apptId = (Integer) request.getAttribute("apptId");
         <span class="section-kicker">Overview</span>
         <h2 class="section-title">Patient Details</h2>
         <% if (patient != null) { %>
-        <div class="info-grid">
-            <div class="info-pair"><span class="info-label">Name</span><span class="info-value"><%= patient.getFullName() %></span></div>
-            <div class="info-pair"><span class="info-label">DOB</span><span class="info-value"><%= patient.getDob() == null ? "-" : patient.getDob() %></span></div>
-            <div class="info-pair"><span class="info-label">Blood Group</span><span class="info-value"><%= patient.getBloodGroup() == null ? "-" : patient.getBloodGroup() %></span></div>
-            <div class="info-pair"><span class="info-label">Emergency Contact</span><span class="info-value"><%= patient.getEmergencyContact() == null ? "-" : patient.getEmergencyContact() %></span></div>
-        </div>
+        <form method="post" action="<%= request.getContextPath() %>/doctor/update-patient-details" class="grid-form compact-form">
+            <input type="hidden" name="patientId" value="<%= patient.getPatientId() %>">
+            <input type="hidden" name="apptId" value="<%= apptId == null ? 0 : apptId %>">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="fullName" required value="<%= patient.getFullName() %>">
+            </div>
+            <div class="form-group">
+                <label>DOB</label>
+                <input type="date" name="dob" value="<%= patient.getDob() == null ? "" : patient.getDob() %>">
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <select name="gender">
+                    <option value="">-- Select Gender --</option>
+                    <option value="Male" <%= "Male".equals(patient.getGender()) ? "selected" : "" %>>Male</option>
+                    <option value="Female" <%= "Female".equals(patient.getGender()) ? "selected" : "" %>>Female</option>
+                    <option value="Other" <%= "Other".equals(patient.getGender()) ? "selected" : "" %>>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Blood Group</label>
+                <input type="text" name="bloodGroup" value="<%= patient.getBloodGroup() == null ? "" : patient.getBloodGroup() %>">
+            </div>
+            <div class="form-group">
+                <label>Emergency Contact</label>
+                <input type="text" name="emergencyContact" value="<%= patient.getEmergencyContact() == null ? "" : patient.getEmergencyContact() %>">
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input type="text" name="address" value="<%= patient.getAddress() == null ? "" : patient.getAddress() %>">
+            </div>
+            <div class="full-span">
+                <button class="btn btn-primary" type="submit">Update Details</button>
+            </div>
+        </form>
         <% } else { %>
             <div class="empty-state">Patient details are unavailable for this visit.</div>
         <% } %>
@@ -49,8 +79,17 @@ Integer apptId = (Integer) request.getAttribute("apptId");
     <% } else {
         for (MedicalRecord record : records) { %>
         <article class="record-card">
-            <h3><%= record.getDiagnosis() %></h3>
-            <p class="muted-copy"><strong>Date:</strong> <%= record.getRecordDate() %></p>
+            <div class="record-card-head">
+                <div>
+                    <h3><%= record.getDiagnosis() %></h3>
+                    <p class="muted-copy"><strong>Date:</strong> <%= record.getRecordDate() %></p>
+                </div>
+                <form method="post" action="<%= request.getContextPath() %>/doctor/delete-record">
+                    <input type="hidden" name="recordId" value="<%= record.getRecordId() %>">
+                    <input type="hidden" name="patientId" value="<%= record.getPatientId() %>">
+                    <button class="btn btn-danger btn-delete" type="submit">Delete</button>
+                </form>
+            </div>
             <p class="muted-copy"><strong>Symptoms:</strong> <%= record.getSymptoms() %></p>
             <p class="muted-copy"><strong>Treatment:</strong> <%= record.getTreatment() %></p>
             <% if (record.getPrescriptions() != null && !record.getPrescriptions().isEmpty()) { %>

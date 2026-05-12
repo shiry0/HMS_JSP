@@ -22,6 +22,23 @@ public abstract class BaseController extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + path);
     }
 
+    public static String dashboardPathFor(User user) {
+        if (user == null) {
+            return "/login";
+        }
+        if ("admin".equalsIgnoreCase(user.getRole())) {
+            return "/admin/dashboard";
+        }
+        if ("doctor".equalsIgnoreCase(user.getRole())) {
+            return "/doctor/dashboard";
+        }
+        return "/patient/dashboard";
+    }
+
+    protected void redirectLoggedUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        redirect(req, resp, dashboardPathFor(getLoggedUser(req)));
+    }
+
     protected void setFlash(HttpServletRequest req, String type, String message) {
         HttpSession session = req.getSession();
         session.setAttribute("flashType", type);

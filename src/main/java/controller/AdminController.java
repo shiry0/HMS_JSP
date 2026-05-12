@@ -1,4 +1,4 @@
-﻿package controller;
+package controller;
 
 import java.io.IOException;
 
@@ -102,6 +102,11 @@ public class AdminController extends BaseController {
                 case "/delete-patient":
                     patientService.deletePatient(intParam(req, "patientId"));
                     setFlash(req, "success", "Patient deleted successfully.");
+                    redirect(req, resp, "/admin/manage-patients");
+                    break;
+                case "/unblock-patient":
+                    patientService.unblockPatient(intParam(req, "patientId"));
+                    setFlash(req, "success", "Patient account unblocked successfully.");
                     redirect(req, resp, "/admin/manage-patients");
                     break;
                 case "/add-department":

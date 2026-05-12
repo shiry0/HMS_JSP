@@ -15,11 +15,19 @@ public class RegisterController extends BaseController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (getLoggedUser(req) != null) {
+            redirectLoggedUser(req, resp);
+            return;
+        }
         forward(req, resp, "/WEB-INF/views/auth/register.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (getLoggedUser(req) != null) {
+            redirectLoggedUser(req, resp);
+            return;
+        }
         try {
             String fullName = req.getParameter("fullName");
             String email = req.getParameter("email");

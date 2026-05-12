@@ -28,8 +28,8 @@ String todayLabel = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMM y
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/dashboard.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css?v=20260512-cancel-reason">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/dashboard.css?v=20260511-records-search">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/forms.css">
     <script>
         window.contextPath = "<%= request.getContextPath() %>";

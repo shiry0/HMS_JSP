@@ -75,12 +75,18 @@ List<Doctor> searchResults = (List<Doctor>) request.getAttribute("searchResults"
         <% if (upcomingAppointments == null || upcomingAppointments.isEmpty()) { %>
             <div class="empty-state">No upcoming appointments.</div>
         <% } else {
+        %>
+            <div class="dashboard-scroll-list">
+        <%
             for (Appointment appointment : upcomingAppointments) { %>
             <div class="record-card">
                 <h3><%= appointment.getApptDate() %></h3>
                 <p class="muted-copy">Dr. <%= appointment.getDoctorName() %> - <%= appointment.getDeptName() %> - <%= appointment.getApptTime() %></p>
             </div>
         <%  }
+        %>
+            </div>
+        <%
         } %>
     </div>
     <div class="card">
@@ -89,12 +95,18 @@ List<Doctor> searchResults = (List<Doctor>) request.getAttribute("searchResults"
         <% if (recentBills == null || recentBills.isEmpty()) { %>
             <div class="empty-state">No bills available.</div>
         <% } else {
+        %>
+            <div class="dashboard-scroll-list">
+        <%
             for (Bill bill : recentBills) { %>
             <div class="record-card">
                 <h3>Rs. <%= String.format("%.2f", bill.getTotalAmount()) %></h3>
                 <p class="muted-copy"><span class="badge badge-<%= bill.getStatus().toLowerCase() %>"><%= bill.getStatus() %></span></p>
             </div>
         <%  }
+        %>
+            </div>
+        <%
         } %>
     </div>
     <div class="card">
@@ -103,12 +115,18 @@ List<Doctor> searchResults = (List<Doctor>) request.getAttribute("searchResults"
         <% if (recentDoctors == null || recentDoctors.isEmpty()) { %>
             <div class="empty-state">No recent doctors available.</div>
         <% } else {
+        %>
+            <div class="dashboard-scroll-list">
+        <%
             for (Doctor doctor : recentDoctors) { %>
             <div class="record-card">
                 <h3>Dr. <%= doctor.getFullName() %></h3>
                 <p class="muted-copy"><%= doctor.getDeptName() %> - <%= doctor.getSpecialization() %></p>
             </div>
         <%  }
+        %>
+            </div>
+        <%
         } %>
     </div>
 </section>

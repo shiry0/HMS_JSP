@@ -50,31 +50,19 @@ request.setAttribute("pageTitle", "MediCore HMS");
     </div>
 </section>
 
-<section class="feature-card-grid">
-    <article class="feature-card">
-        <span class="feature-icon"><span class="material-symbols-outlined">event</span></span>
-        <strong>Appointment Control</strong>
-        <p>Book, confirm, complete, and cancel visits in one flow.</p>
-    </article>
-    <article class="feature-card accent">
-        <span class="feature-icon"><span class="material-symbols-outlined">description</span></span>
-        <strong>Medical Records</strong>
-        <p>Keep diagnoses, treatment, and prescriptions together.</p>
-    </article>
-    <article class="feature-card">
-        <span class="feature-icon"><span class="material-symbols-outlined">payments</span></span>
-        <strong>Billing Visibility</strong>
-        <p>See fees, payments, and remaining balances clearly.</p>
-    </article>
-</section>
-
-<section class="cta-panel">
-    <span class="page-eyebrow">Get Started</span>
-    <h2 class="section-title">Start in the right portal.</h2>
-    <p class="hero-copy">Staff can log in and patients can register in a few steps.</p>
-    <div class="hero-actions">
-        <a class="btn btn-secondary" href="<%= request.getContextPath() %>/login">Login</a>
-        <a class="btn btn-ghost" href="<%= request.getContextPath() %>/about.jsp">Explore MediCore</a>
+<section class="medical-news-section">
+    <div class="toolbar">
+        <div class="toolbar-block">
+            <span class="section-kicker">Live Medical News</span>
+            <h2 class="section-title">Current health research and care updates.</h2>
+        </div>
+    </div>
+    <div id="medicalNewsGrid" class="medical-news-grid" aria-live="polite">
+        <article class="news-card news-card-loading">
+            <span class="feature-icon"><span class="material-symbols-outlined">hourglass_empty</span></span>
+            <strong>Loading health topics...</strong>
+            <p>Fetching preventive care and wellness guidance.</p>
+        </article>
     </div>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
