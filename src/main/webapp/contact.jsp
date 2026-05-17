@@ -3,9 +3,9 @@
 request.setAttribute("pageTitle", "Contact");
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<section class="split-grid">
-    <div class="card">
-        <span class="page-eyebrow">Contact</span>
+<section class="public-section-grid contact-layout">
+    <div class="public-panel">
+        <span class="page-eyebrow"><span class="material-symbols-outlined">mail</span> Contact</span>
         <h1 class="section-title">Contact MediCore.</h1>
         <p class="section-subtitle">Send a question, support request, or feedback.</p>
         <% if (request.getAttribute("error") != null) { %>
@@ -30,8 +30,8 @@ request.setAttribute("pageTitle", "Contact");
             <button class="btn btn-primary" type="submit">Send Message</button>
         </form>
     </div>
-    <div class="hero-panel">
-        <span class="page-eyebrow">Hospital Information</span>
+    <div class="public-panel accent-panel">
+        <span class="page-eyebrow"><span class="material-symbols-outlined">support_agent</span> Hospital Information</span>
         <h2 class="section-title">Quick support details.</h2>
         <div class="timeline">
             <div class="timeline-item">

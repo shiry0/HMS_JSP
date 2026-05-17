@@ -3,21 +3,21 @@
 request.setAttribute("pageTitle", "About");
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<section class="page-header card">
-    <span class="page-eyebrow">About MediCore</span>
+<section class="public-page-hero">
+    <span class="page-eyebrow"><span class="material-symbols-outlined">info</span> About MediCore</span>
     <h1 class="page-title">Simple hospital management for daily work.</h1>
     <p class="hero-copy">MediCore brings registration, scheduling, records, and billing into one Java web application.</p>
 </section>
 
-<section class="grid-two">
-    <article class="card prose-card">
-        <span class="section-kicker">Mission</span>
+<section class="public-section-grid">
+    <article class="public-panel prose-card">
+        <span class="section-kicker"><span class="material-symbols-outlined">flag</span> Mission</span>
         <h2 class="section-title">Cut extra steps.</h2>
         <p>MediCore replaces scattered manual work with one cleaner system for staff and patients.</p>
         <p>The project uses Java EE, JSP, Servlets, CSS, JavaScript, and MySQL with separate roles for admin, doctor, and patient users.</p>
     </article>
-    <article class="hero-panel">
-        <span class="page-eyebrow">Core Scope</span>
+    <article class="public-panel accent-panel">
+        <span class="page-eyebrow"><span class="material-symbols-outlined">account_tree</span> Core Scope</span>
         <h2 class="section-title">Main modules.</h2>
         <div class="timeline">
             <div class="timeline-item">
@@ -36,7 +36,7 @@ request.setAttribute("pageTitle", "About");
     </article>
 </section>
 
-<section class="feature-card-grid">
+<section class="public-feature-grid">
     <article class="feature-card">
         <span class="feature-icon"><span class="material-symbols-outlined">favorite</span></span>
         <strong>Cardiology</strong>

@@ -9,8 +9,11 @@ boolean homeActive = "/".equals(currentPath) || "".equals(currentPath) || "/inde
 <header class="public-nav">
     <div class="public-nav-inner">
         <a class="nav-brand" href="<%= request.getContextPath() %>/index.jsp">
-            <img class="brand-logo" src="<%= request.getContextPath() %>/images/logo.png" alt="MediCore HMS">
-            <span class="sr-only">Hospital management reimagined</span>
+            <img class="brand-logo public-brand-logo" src="<%= request.getContextPath() %>/images/logo.png" alt="MediCore HMS">
+            <span class="brand-copy">
+                <strong>MediCore HMS</strong>
+                <small>Hospital Management</small>
+            </span>
         </a>
         <nav class="nav-links">
             <a class="nav-link <%= homeActive ? "is-active" : "" %>" href="<%= request.getContextPath() %>/index.jsp">Home</a>
